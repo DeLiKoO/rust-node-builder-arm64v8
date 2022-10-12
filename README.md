@@ -12,10 +12,14 @@ sudo apt update
 sudo apt install -y qemu-user-static
 ```
 
+## Building the image
+```
+docker buildx build -t rust-node-builder-arm64v8:latest --platform linux/arm64/v8 .
+```
+
 ## Running an interactive shell
 ```
 docker run -it rust-node-builder-arm64v8
 root@6e3f4aee301b:~# uname -m
 aarch64
 ```
-
