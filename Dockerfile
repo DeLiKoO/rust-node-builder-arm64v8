@@ -5,11 +5,11 @@ WORKDIR /root
 ENV NODE_VERSION "12.22.7"
 
 # Base system dependencies
-RUN apt update
-RUN apt upgrade -y
+RUN apt update && apt upgrade -y
 
 # Build tools
-RUN apt install -y build-essential
+RUN apt update && apt install -y nano git build-essential python3
+RUN apt update && apt install -y libclang-dev libv4l-dev
 # RUN apt install -y gcc-aarch64-linux-gnu
 
 # curl
@@ -32,3 +32,6 @@ RUN ln -s /opt/node-v${NODE_VERSION} /opt/node
 ENV PATH "$PATH:/opt/node/bin"
 RUN npm -v
 RUN node -v
+
+# cargo config to fix huge memory leak during cargo install
+COPY ./.cargo/config .cargo/config
